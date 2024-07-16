@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title>To-Do App</title>
+</h:head>
+<h:body>
+    <h:form>
+        <h:panelGrid columns="2">
+            <h:outputLabel for="description" value="Description:"/>
+            <h:inputText id="description" value="#{taskBean.description}" required="true"/>
+            <h:commandButton value="Add Task" action="#{taskBean.addTask}"/>
+        </h:panelGrid>
+        <h:dataTable value="#{taskBean.tasks}" var="task">
+            <h:column>
+                <f:facet name="header">Description</f:facet>
+                #{task.description}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Completed</f:facet>
+                <h:selectBooleanCheckbox value="#{task.completed}"/>
+            </h:column>
+            <h:column>
+                <h:commandButton value="Update" action="#{taskBean.updateTask(task)}"/>
+                <h:commandButton value="Delete" action="#{taskBean.deleteTask(task)}"/>
+            </h:column>
+        </h:dataTable>
+    </h:form>
+</h:body>
+</html>
+
